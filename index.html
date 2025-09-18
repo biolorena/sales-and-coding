@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nice to see you here!</title>
+  <style>
+    :root{
+      --bg1:#0f172a; --bg2:#1e293b; --ink:#e2e8f0; --muted:#94a3b8; --cyan:#22d3ee; --vio:#7c3aed; --ok:#16a34a;
+      --glass:rgba(255,255,255,.03); --border:rgba(255,255,255,.12);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg2),var(--bg1));color:var(--ink);font-family:system-ui,Segoe UI,Roboto,Inter,Arial}
+    .card{width:min(720px,100%);padding:24px;border-radius:18px;background:var(--glass);border:1px solid rgba(255,255,255,.08);box-shadow:0 14px 40px rgba(0,0,0,.35);text-align:center;margin:16px}
+    h1{margin:0 0 6px 0;font-size:1.6rem;color:var(--cyan)}
+    p.sub{margin:0 0 14px 0;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:10px}
+    .pill{display:inline-block;padding:6px 12px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:14px;margin:4px}
+    .btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:18px 0}
+    button{appearance:none;border:0;padding:14px 18px;border-radius:14px;color:#fff;font-weight:800;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.35);transition:transform .15s ease}
+    button:hover{transform:scale(1.05)}
+    #hire{background:linear-gradient(180deg,var(--ok),#15803d)}
+    #nope{background:linear-gradient(180deg,var(--cyan),#0284c7);position:relative}
+    .flag{margin-top:8px;color:var(--muted);font-size:14px}
+    a{color:var(--cyan);text-decoration:none}
+    footer{margin-top:14px;color:var(--muted);font-size:12px}
+    canvas{position:fixed;inset:0;pointer-events:none}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 id="headline">Heard that coding is important. Now I'm learning how to "code outreach" 🦔</h1>
+    <p id="subtitle" class="sub">I’m Lorena! And I like turning warm and cold leads into real conversations (with some laughs on the way).</p>
+
+    <div id="pills" class="grid" aria-label="Why me">
+      <span class="pill">☕ Coffee, cats & gaming person (cliché but true)</span>
+      <span class="pill">😂 Outreach with questionable jokes (and it works)</span>
+      <span class="pill">🧪 Tested warmbound in different teams (also inbound + outbound)</span>
+      <span class="pill">📈 Solid reply rates, not spray & pray</span>
+      <span class="pill">🎯 Reached & converted “allergic-to-people” prospects</span>
+    </div>
+
+    <div class="btns">
+      <button id="hire" aria-label="We want Lorena">We want Lorena</button>
+      <button id="nope" aria-label="Go with someone else">Go with someone else 🙃</button>
+    </div>
+
+    <div class="flag">Feature flag → <strong id="flagLabel">Ask Lorena to Join Us</strong>: <span id="flag">OFF</span></div>
+
+    <footer>
+      Still unsure? Check more details on my LinkedIn. <a id="linkedin" href="https://www.linkedin.com/in/lorenaviana" target="_blank" rel="noopener">/lorenaviana</a>
+    </footer>
+  </div>
+
+  <canvas id="confetti"></canvas>
+
+  <script>
+    // ================ Tiny confetti
+    const cf = document.getElementById('confetti');
+    const cfx = cf.getContext('2d');
+    function sizeCanvas(){ cf.width = innerWidth; cf.height = innerHeight; }
+    sizeCanvas(); addEventListener('resize', sizeCanvas);
+    let bits = [];
+    function burst(x,y){ for(let i=0;i<80;i++){ bits.push({x,y, vx:(Math.random()*2-1)*4, vy:(Math.random()*-1-1)*4, r:Math.random()*2+1, h:Math.random()*360}); }}
+    function render(){ cfx.clearRect(0,0,cf.width,cf.height); for(const b of bits){ b.vy+=0.05; b.x+=b.vx; b.y+=b.vy; cfx.fillStyle = `hsl(${b.h} 90% 60%)`; cfx.beginPath(); cfx.arc(b.x,b.y,b.r,0,Math.PI*2); cfx.fill(); } bits = bits.filter(b=> b.y < cf.height+10); requestAnimationFrame(render);} render();
+
+    // ================= Helpers & tests
+    function buildMailto(email, subject, body){ return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; }
+    (function runTests(){ const t1 = buildMailto('test@example.com','Hello World','Body with spaces & symbols % ?'); console.assert(t1.startsWith('mailto:test@example.com?subject='),'mailto scheme'); console.assert(t1.includes('body='),'mailto body'); console.assert(!/\s/.test(t1),'no raw spaces'); })();
+
+    // ================ State & DOM
+    const $ = s => document.querySelector(s);
+    const headline = $('#headline');
+    const subtitle = $('#subtitle');
+    const pills = $('#pills');
+    const hireBtn = $('#hire');
+    const nopeBtn = $('#nope');
+    const flagEl = $('#flag');
+    const flagLabel = $('#flagLabel');
+    const linkedin = $('#linkedin');
+
+    const DEFAULTS = {
+      headline: headline.textContent,
+      subtitle: subtitle.textContent,
+      pills: Array.from(pills.children).map(el=>el.textContent),
+      hireText: hireBtn.textContent,
+      nopeText: nopeBtn.textContent,
+      flagLabel: flagLabel.textContent,
+      email: 'vianap.lorena@gmail.com',
+      linkedin: 'https://www.linkedin.com/in/lorenaviana'
+    };
+
+    function applyCfg(){
+      headline.textContent = DEFAULTS.headline;
+      subtitle.textContent = DEFAULTS.subtitle;
+      pills.innerHTML = DEFAULTS.pills.map(t=>`<span class="pill">${t}</span>`).join('');
+      hireBtn.textContent = DEFAULTS.hireText;
+      nopeBtn.textContent = DEFAULTS.nopeText;
+      flagLabel.textContent = DEFAULTS.flagLabel;
+      linkedin.href = DEFAULTS.linkedin;
+      linkedin.textContent = new URL(DEFAULTS.linkedin).pathname || DEFAULTS.linkedin;
+    }
+    applyCfg();
+
+    // ================ Buttons behavior
+    const FLEE_RADIUS = 30;
+    function fallbackContact(){ (async ()=>{ try{ await navigator.clipboard.writeText(DEFAULTS.email); }catch(_){} alert(`Couldn't open your email app. Copied: ${DEFAULTS.email}`); window.open(DEFAULTS.linkedin,'_blank'); })(); }
+
+    hireBtn.addEventListener('click', ()=>{
+      flagEl.textContent = 'ON';
+      burst(innerWidth/2, innerHeight/3);
+      const subject = 'We want you on the team';
+      const body = 'Hi Lorena, loved your mini site. Can we chat about warmbound experiments and how pineapple correctly belongs on pizza?';
+      const mailto = buildMailto(DEFAULTS.email, subject, body);
+      try{ window.location.href = mailto; }catch(e){ fallbackContact(); }
+    });
+
+    function flee(ev){
+      const rect = nopeBtn.getBoundingClientRect();
+      const cx = rect.left + rect.width/2; const cy = rect.top + rect.height/2;
+      const dx = ev.clientX - cx; const dy = ev.clientY - cy; const dist = Math.hypot(dx,dy)||1; const push = 120;
+      let nx = rect.left - (dx/dist)*push; let ny = rect.top - (dy/dist)*push; const pad = 12;
+      nx = Math.max(pad, Math.min(innerWidth - rect.width - pad, nx));
+      ny = Math.max(pad, Math.min(innerHeight - rect.height - pad, ny));
+      nopeBtn.style.position='fixed'; nopeBtn.style.left=nx+'px'; nopeBtn.style.top=ny+'px';
+    }
+    document.addEventListener('mousemove', (e)=>{ const r = nopeBtn.getBoundingClientRect(); const within = e.clientX>r.left-FLEE_RADIUS && e.clientX<r.right+FLEE_RADIUS && e.clientY>r.top-FLEE_RADIUS && e.clientY<r.bottom+FLEE_RADIUS; if(within) flee(e); });
+    nopeBtn.addEventListener('click', ()=>{ alert("Marie Kondo alerts: This does not spark joy."); });
+  </script>
+</body>
+</html>
