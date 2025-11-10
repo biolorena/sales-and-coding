@@ -1,13 +1,12 @@
-A nostalgic experiment.
+Looks like PostHog is searching for someone who can pull a wololo (not literally, yet) and conveert engineers. Someone who knows well about that kind of conversion and survived the seven circles of outbound before could come in handy.
 
-Years ago I used to mess with blog templates in raw HTML and even programmed some Arduino projects for my neuroscience lab project, but I forgot almost everything.  
-This was my way to relearn the basics, mix in some humor, and see what I could ship and edit quickly with some AI help.
+As one of the founding SDRs at Hotjar, I helped build the function from zero by constantly balancing “don’t break what’s working” and lots of experiments. It taught me that the best outreach feels like a coincidence (and prevents the brand from spontaneously combusting in the process).
+
+Simon already knows part of how I've done that and apparently enjoyed our conversation, but I'd love to share with you as well.
+
+While we’re not talking yet, here’s mini website (you can call it some sort of "code outreach") that explains a little bit of why you could use a resourceful experienced BDR to be your next hedgehog whisperer.
 
 See it live: [CLICK HERE](https://biolorena.github.io/sales-and-coding/)
-
-## Why
-Instead of doing yet another “hello world,” I wanted to blend nostalgia (blog HTML, Arduino fun) with my current world of outreach as an SDR.  
-So here's a playful page where you’ll find two buttons (only one of them actually plays nice).
 
 ## Features
 - Two buttons with very different personalities 
