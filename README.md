@@ -2,9 +2,9 @@ Looks like PostHog is searching for someone who can pull a wololo (not literally
 
 As one of the founding SDRs at Hotjar, I helped build the function from zero by constantly balancing “don’t break what’s working” and lots of experiments. It taught me that the best outreach feels like a coincidence (and prevents the brand from spontaneously combusting in the process).
 
-Simon already knows part of how I've done that and apparently enjoyed our conversation, but I'd love to share with you as well.
+Simon already knows part of how I've done that and apparently enjoyed our conversation, but I'd love to share with the team as well.
 
-While we’re not talking yet, here’s mini website (you can call it some sort of "code outreach") that explains a little bit of why you could use a resourceful experienced BDR to be your next hedgehog whisperer.
+While we’re not talking yet, here’s mini website (you can call it some sort of "code outreach") that explains a little bit of why you could use a resourceful and experienced BDR to be your next hedgehog whisperer.
 
 See it live: [CLICK HERE](https://biolorena.github.io/sales-and-coding/)
 
