@@ -1,4 +1,4 @@
-Looks like PostHog is searching for someone who can pull a wololo (not literally, yet) and conveert engineers into customers. Someone who knows well about that kind of conversion and survived the seven circles of outbound before could come in handy.
+Looks like PostHog is searching for someone who can pull a wololo (not literally, yet) and convert engineers into customers. Someone who knows well about that kind of conversion and survived the seven circles of outbound before could come in handy.
 
 As one of the founding SDRs at Hotjar, I helped build the function from zero by constantly balancing “don’t break what’s working” and lots of experiments. It taught me that the best outreach feels like a coincidence (and prevents the brand from spontaneously combusting in the process).
 
