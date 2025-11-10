@@ -122,8 +122,8 @@
     hireBtn.addEventListener('click', ()=>{
       flagEl.textContent = 'ON';
       burst(innerWidth/2, innerHeight/3);
-      const subject = 'We want you on the team';
-      const body = 'Hi Lorena, loved your mini site. Can we chat about warmbound experiments and how pineapple correctly belongs on pizza?';
+      const subject = 'We want to learn more about you';
+      const body = 'Hi Lorena, loved your mini site. Can we chat about outbound experiments and how pineapple correctly belongs on pizza?';
       const mailto = buildMailto(DEFAULTS.email, subject, body);
       try{ window.location.href = mailto; }catch(e){ fallbackContact(); }
     });
